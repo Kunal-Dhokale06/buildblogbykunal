@@ -1,0 +1,20 @@
+{
+  "name": "ai-sandboxing-blog",
+  "version": "1.0.0",
+  "description": "Sandboxing AI Agents, Docker Model Runner & Docker Sandboxes publication",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y serve -l 3000",
+    "start": "npx -y serve -l 3000",
+    "serve": "npx -y serve -l 3000"
+  },
+  "keywords": [
+    "ai-agents",
+    "docker-sandbox",
+    "model-runner",
+    "sustainability",
+    "security"
+  ],
+  "author": "",
+  "license": "MIT"
+}
