@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initScrollSpy();
   initMobileMenu();
+  initBackToTop();
 });
 
 /**
@@ -128,3 +129,27 @@ function initMobileMenu() {
     });
   });
 }
+
+/**
+ * 5. Back to Top Button
+ */
+function initBackToTop() {
+  const backToTopBtn = document.getElementById('back-to-top-btn');
+  if (!backToTopBtn) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
