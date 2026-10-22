@@ -128,71 +128,17 @@ function initBackToTop() {
  * 5. Interactive Blog Comments & Star Rating System
  */
 function initCommentsAndRatings() {
-  const STORAGE_KEY = 'buildlog_kunal_comments_v1';
+  const STORAGE_KEY = 'buildlog_kunal_user_comments';
   const LIKED_KEY = 'buildlog_kunal_liked_ids';
 
-  // Seed baseline comments from peers and readers
-  const DEFAULT_COMMENTS = [
-    {
-      id: 'comment_1',
-      author: 'Alex Rivera',
-      role: 'Platform Engineer @ ScaleOps',
-      rating: 5,
-      content: 'The section on Docker Model Runner dynamic GPU unloading hit right at home. We were burning $4k/month on idle Ollama instances for dev agents. Sandboxing each agent run while sharing the model weights is the exact pattern the industry needs. Super clean breakdown Kunal!',
-      avatarColor: '#6366f1',
-      createdAt: Date.now() - 1000 * 60 * 60 * 48, // 2 days ago
-      displayTime: '2 days ago',
-      likes: 24,
-      replies: [
-        {
-          id: 'reply_1_1',
-          author: 'Kunal',
-          role: 'Author',
-          content: 'Thanks Alex! Exactly why I wrote this—saving both the security blast radius and the cloud bill makes adopting agents viable.',
-          avatarColor: '#f59e0b',
-          displayTime: '1 day ago'
-        }
-      ]
-    },
-    {
-      id: 'comment_2',
-      author: 'Dr. Elena Rostova',
-      role: 'Sandboxing & Security Researcher',
-      rating: 5,
-      content: 'Fantastic emphasis on why prompts are merely suggestions whereas engineering constraints (cgroups, namespaces, gVisor) enforce real boundaries. The comparison between full VMs, containers, and microVM sandboxes should be required reading for anyone deploying autonomous coding agents.',
-      avatarColor: '#06b6d4',
-      createdAt: Date.now() - 1000 * 60 * 60 * 24, // 1 day ago
-      displayTime: '1 day ago',
-      likes: 19,
-      replies: []
-    },
-    {
-      id: 'comment_3',
-      author: 'Marcus Chen',
-      role: 'Senior DevOps Architect',
-      rating: 5,
-      content: 'Loved the visual diagrams and practical walkthrough of Docker Sandboxes. Never realized YOLO mode was so rampant in local dev until I saw colleagues running unchecked pip installs in agents. Great work!',
-      avatarColor: '#10b981',
-      createdAt: Date.now() - 1000 * 60 * 60 * 16, // 16 hours ago
-      displayTime: '16 hours ago',
-      likes: 11,
-      replies: []
-    },
-    {
-      id: 'comment_4',
-      author: 'Priya Sharma',
-      role: 'Fullstack & LLM Developer',
-      rating: 4,
-      content: 'Really insightful article! The distinction between standard containers and ephemeral agent sandboxes cleared up a lot of misconceptions. Would love a follow-up on networking isolation policies with eBPF!',
-      avatarColor: '#a855f7',
-      createdAt: Date.now() - 1000 * 60 * 60 * 6, // 6 hours ago
-      displayTime: '6 hours ago',
-      likes: 8,
-      replies: []
-    }
-  ];
+  // Clean up legacy test comments storage
+  try {
+    localStorage.removeItem('buildlog_kunal_comments_v1');
+  } catch (e) {
+    // Ignore storage errors in restricted contexts
+  }
 
-  // Load from local storage or initialize
+  // Load from local storage or start with empty list
   let comments = [];
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -203,9 +149,8 @@ function initCommentsAndRatings() {
     console.warn('Storage read failed', err);
   }
 
-  if (!comments || !Array.isArray(comments) || comments.length === 0) {
-    comments = DEFAULT_COMMENTS;
-    saveComments(comments);
+  if (!Array.isArray(comments)) {
+    comments = [];
   }
 
   let likedIds = new Set();
@@ -444,17 +389,17 @@ function initCommentsAndRatings() {
     });
   });
 
-  // 7. Reset Comments Demo
+  // 7. Reset / Clear Comments
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
-      if (confirm('Reset to initial community reviews and clear added comments?')) {
-        comments = DEFAULT_COMMENTS;
+      if (confirm('Clear all comments and reset the discussion?')) {
+        comments = [];
         likedIds.clear();
         saveComments(comments);
         saveLikes();
         renderComments();
         updateRatingDashboard();
-        showStatus('Reset completed. Original reviews restored.', 'success');
+        showStatus('All comments cleared successfully.', 'success');
       }
     });
   }
@@ -473,36 +418,58 @@ function initCommentsAndRatings() {
 
   function updateRatingDashboard() {
     const totalCount = comments.length;
-    let avg = 5.0;
-    if (totalCount > 0) {
-      const sum = comments.reduce((acc, c) => acc + (c.rating || 5), 0);
-      avg = (sum / totalCount).toFixed(1);
+    const avgDisplay = document.getElementById('rating-average-display');
+    const starsLarge = document.getElementById('rating-stars-summary');
+    const totalCountEl = document.getElementById('rating-total-count');
+    const displayCountEl = document.getElementById('comments-display-count');
+    const heroSummary = document.getElementById('hero-rating-summary');
+    const satisfactionChip = document.querySelector('.rating-satisfaction-chip span');
+
+    if (totalCount === 0) {
+      if (avgDisplay) avgDisplay.textContent = '—';
+      if (starsLarge) {
+        starsLarge.textContent = '☆☆☆☆☆';
+        starsLarge.setAttribute('aria-label', 'No ratings yet');
+      }
+      if (totalCountEl) totalCountEl.textContent = '0';
+      if (displayCountEl) displayCountEl.textContent = '0';
+      if (heroSummary) heroSummary.innerHTML = '<strong>Rate this post</strong> (0 reviews)';
+      if (satisfactionChip) satisfactionChip.textContent = '⭐ Leave the first review';
+
+      // Navigation & TOC count badges
+      document.querySelectorAll('.comment-count-badge, #toc-comment-count').forEach(el => {
+        el.textContent = '0';
+      });
+
+      // Breakdown bars to 0
+      for (let s = 1; s <= 5; s++) {
+        const fillBar = document.getElementById(`bar-fill-${s}`);
+        const countEl = document.getElementById(`bar-count-${s}`);
+        if (fillBar) fillBar.style.width = '0%';
+        if (countEl) countEl.textContent = '0';
+      }
+
+      if (resetBtn) resetBtn.style.display = 'none';
+      return;
     }
 
-    // Update Average Display
-    const avgDisplay = document.getElementById('rating-average-display');
-    if (avgDisplay) avgDisplay.textContent = avg;
+    // When reviews exist
+    const sum = comments.reduce((acc, c) => acc + (c.rating || 5), 0);
+    const avg = (sum / totalCount).toFixed(1);
 
-    // Update Stars Large
-    const starsLarge = document.getElementById('rating-stars-summary');
+    if (avgDisplay) avgDisplay.textContent = avg;
     if (starsLarge) {
       const fullStars = Math.round(parseFloat(avg));
       starsLarge.textContent = '★'.repeat(fullStars) + '☆'.repeat(5 - fullStars);
       starsLarge.setAttribute('aria-label', `Rating: ${avg} out of 5 stars`);
     }
 
-    // Update Counts
-    const totalCountEl = document.getElementById('rating-total-count');
     if (totalCountEl) totalCountEl.textContent = totalCount;
-
-    const displayCountEl = document.getElementById('comments-display-count');
     if (displayCountEl) displayCountEl.textContent = totalCount;
-
-    // Hero Badge Summary
-    const heroSummary = document.getElementById('hero-rating-summary');
     if (heroSummary) {
       heroSummary.innerHTML = `<strong>${avg}</strong> (${totalCount} review${totalCount === 1 ? '' : 's'})`;
     }
+    if (satisfactionChip) satisfactionChip.textContent = '🛡️ 100% Recommended read';
 
     // Navigation & TOC count badges
     document.querySelectorAll('.comment-count-badge, #toc-comment-count').forEach(el => {
@@ -512,12 +479,14 @@ function initCommentsAndRatings() {
     // Breakdown Bars
     for (let s = 1; s <= 5; s++) {
       const count = comments.filter(c => c.rating === s).length;
-      const pct = totalCount > 0 ? Math.round((count / totalCount) * 100) : 0;
+      const pct = Math.round((count / totalCount) * 100);
       const fillBar = document.getElementById(`bar-fill-${s}`);
       const countEl = document.getElementById(`bar-count-${s}`);
       if (fillBar) fillBar.style.width = `${pct}%`;
       if (countEl) countEl.textContent = count;
     }
+
+    if (resetBtn) resetBtn.style.display = 'inline-block';
   }
 
   function renderComments(highlightId = null) {
@@ -526,8 +495,10 @@ function initCommentsAndRatings() {
 
     if (sorted.length === 0) {
       commentsList.innerHTML = `
-        <div class="comment-card" style="text-align: center; color: var(--text-secondary); padding: 40px;">
-          <p>No comments yet. Be the first to rate and review this post!</p>
+        <div class="comments-empty-state">
+          <div class="empty-icon">💬</div>
+          <h4>No comments yet</h4>
+          <p>Be the first reader to rate this article and start the discussion!</p>
         </div>
       `;
       return;

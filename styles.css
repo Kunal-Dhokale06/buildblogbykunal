@@ -2976,6 +2976,41 @@ p strong {
   gap: 20px;
 }
 
+/* Empty State */
+.comments-empty-state {
+  text-align: center;
+  padding: 44px 24px;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.empty-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.comments-empty-state h4 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin: 0;
+  font-weight: 700;
+}
+
+.comments-empty-state p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  max-width: 440px;
+  line-height: 1.55;
+  margin: 0;
+}
+
 .comment-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
