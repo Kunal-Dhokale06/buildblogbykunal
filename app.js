@@ -2,13 +2,21 @@
  * AgentGuard.io - Interactive UI Logic
  * - Reading Progress Bar
  * - Active ScrollSpy for Header & Sidebar TOC
- * - Dark / Light Theme Toggle with LocalStorage
  * - Mobile Navigation Menu Toggle
+ * - Back to Top Button
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Enforce dark mode and clean up any legacy theme preference
+  try {
+    localStorage.removeItem('agentguard-theme');
+  } catch (e) {
+    // Ignore storage errors in restricted contexts
+  }
+  document.body.classList.remove('light-theme');
+  document.body.classList.add('dark-theme');
+
   initReadingProgressBar();
-  initThemeToggle();
   initScrollSpy();
   initMobileMenu();
   initBackToTop();
@@ -27,36 +35,6 @@ function initReadingProgressBar() {
     const progress = (window.scrollY / totalHeight) * 100;
     progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
   }, { passive: true });
-}
-
-/**
- * 2. Theme Toggle (Cosmic Dark / Clean Precision Light)
- */
-function initThemeToggle() {
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  if (!themeToggleBtn) return;
-
-  // Retrieve saved preference or system preference
-  const savedTheme = localStorage.getItem('agentguard-theme');
-  if (savedTheme === 'light') {
-    document.body.classList.remove('dark-theme');
-    document.body.classList.add('light-theme');
-  } else {
-    document.body.classList.add('dark-theme');
-    document.body.classList.remove('light-theme');
-  }
-
-  themeToggleBtn.addEventListener('click', () => {
-    if (document.body.classList.contains('light-theme')) {
-      document.body.classList.remove('light-theme');
-      document.body.classList.add('dark-theme');
-      localStorage.setItem('agentguard-theme', 'dark');
-    } else {
-      document.body.classList.remove('dark-theme');
-      document.body.classList.add('light-theme');
-      localStorage.setItem('agentguard-theme', 'light');
-    }
-  });
 }
 
 /**
