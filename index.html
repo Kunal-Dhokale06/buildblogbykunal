@@ -54,6 +54,9 @@
         <a href="#part-3" class="nav-link" data-target="part-3">
           <span class="nav-badge">03</span> Docker Sandboxes
         </a>
+        <a href="#comments-section" class="nav-link" data-target="comments-section">
+          <span class="nav-badge">★</span> Reviews
+        </a>
       </nav>
 
       <div class="header-actions">
@@ -71,6 +74,7 @@
       <a href="#part-2" class="mobile-nav-link">02. Model Runner & Sustainability</a>
       <a href="#part-3" class="mobile-nav-link">03. Docker Sandboxes Deep Dive</a>
       <a href="#author-card" class="mobile-nav-link">About Kunal & Connect</a>
+      <a href="#comments-section" class="mobile-nav-link">💬 Comments & Ratings</a>
     </div>
   </header>
 
@@ -115,6 +119,11 @@
         <div class="meta-item">
           <span>💡 Community Talk Lessons</span>
         </div>
+        <div class="meta-divider">&bull;</div>
+        <a href="#comments-section" class="meta-item meta-rating-item" title="Jump to comments and ratings">
+          <span class="meta-stars-inline">★★★★★</span>
+          <span id="hero-rating-summary"><strong>4.9</strong> (4 reviews)</span>
+        </a>
       </div>
 
       <!-- Key Pillars Bar -->
@@ -156,6 +165,7 @@
         <a href="#part-1" class="index-chip">Part 1: Sandboxing AI Agents</a>
         <a href="#part-2" class="index-chip">Part 2: Docker Model Runner</a>
         <a href="#part-3" class="index-chip">Part 3: Docker Sandboxes</a>
+        <a href="#comments-section" class="index-chip index-chip-comments">💬 Reviews & Ratings (<span class="comment-count-badge">4</span>)</a>
       </div>
     </div>
   </section>
@@ -220,6 +230,12 @@
             </li>
             <li>
               <a href="#author-card" class="toc-item toc-h2">About Buildlog by Kunal</a>
+            </li>
+            <li>
+              <a href="#comments-section" class="toc-item toc-h2">
+                <span>💬 Discussion & Ratings</span>
+                <span class="toc-badge-count" id="toc-comment-count">4</span>
+              </a>
             </li>
           </ul>
 
@@ -1598,6 +1614,288 @@
                 </a>
               </div>
             </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             COMMENTS & RATING SECTION
+             ========================================== -->
+        <section id="comments-section" class="comments-section">
+          <!-- Section Heading -->
+          <div class="comments-header">
+            <div class="section-tag-row">
+              <span class="pill-badge pill-purple">💬 Community & Peer Reviews</span>
+              <span class="pill-badge pill-amber">⭐ Reader Ratings</span>
+            </div>
+            <h2 class="comments-main-title">Discussion & Article Ratings</h2>
+            <p class="comments-subtitle">
+              Have you experimented with AI agent sandboxes, Docker Model Runner, or secure local execution? 
+              Share your rating, leave feedback, and connect with other builders below.
+            </p>
+          </div>
+
+          <!-- Overall Rating Dashboard -->
+          <div class="rating-dashboard">
+            <!-- Left Score Box -->
+            <div class="rating-score-box">
+              <div class="rating-big-number" id="rating-average-display">4.9</div>
+              <div class="rating-stars-large" id="rating-stars-summary" aria-label="Rating: 4.9 out of 5 stars">
+                ★★★★★
+              </div>
+              <div class="rating-count-text">
+                Based on <strong id="rating-total-count">4</strong> community reviews
+              </div>
+              <div class="rating-satisfaction-chip">
+                <span>🛡️ 100% Recommended read</span>
+              </div>
+            </div>
+
+            <!-- Middle Rating Bars Breakdown -->
+            <div class="rating-breakdown-box">
+              <h4 class="breakdown-title">Rating Breakdown</h4>
+              <div class="breakdown-bars" id="breakdown-bars-container">
+                <div class="breakdown-row" data-star="5">
+                  <span class="breakdown-label">5 stars</span>
+                  <div class="breakdown-track">
+                    <div class="breakdown-fill star-5" id="bar-fill-5" style="width: 75%;"></div>
+                  </div>
+                  <span class="breakdown-count" id="bar-count-5">3</span>
+                </div>
+                <div class="breakdown-row" data-star="4">
+                  <span class="breakdown-label">4 stars</span>
+                  <div class="breakdown-track">
+                    <div class="breakdown-fill star-4" id="bar-fill-4" style="width: 25%;"></div>
+                  </div>
+                  <span class="breakdown-count" id="bar-count-4">1</span>
+                </div>
+                <div class="breakdown-row" data-star="3">
+                  <span class="breakdown-label">3 stars</span>
+                  <div class="breakdown-track">
+                    <div class="breakdown-fill star-3" id="bar-fill-3" style="width: 0%;"></div>
+                  </div>
+                  <span class="breakdown-count" id="bar-count-3">0</span>
+                </div>
+                <div class="breakdown-row" data-star="2">
+                  <span class="breakdown-label">2 stars</span>
+                  <div class="breakdown-track">
+                    <div class="breakdown-fill star-2" id="bar-fill-2" style="width: 0%;"></div>
+                  </div>
+                  <span class="breakdown-count" id="bar-count-2">0</span>
+                </div>
+                <div class="breakdown-row" data-star="1">
+                  <span class="breakdown-label">1 star</span>
+                  <div class="breakdown-track">
+                    <div class="breakdown-fill star-1" id="bar-fill-1" style="width: 0%;"></div>
+                  </div>
+                  <span class="breakdown-count" id="bar-count-1">0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Quick Community Stats Box -->
+            <div class="rating-meta-box">
+              <h4 class="breakdown-title">Community Highlights</h4>
+              <ul class="community-perks-list">
+                <li>
+                  <span class="perk-icon">⚡</span>
+                  <div>
+                    <strong>Top Highlight:</strong>
+                    <p>Docker Model Runner GPU memory unloading</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="perk-icon">🔒</span>
+                  <div>
+                    <strong>Security Consensus:</strong>
+                    <p>Zero-trust isolation beats system prompt rules</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="perk-icon">🌱</span>
+                  <div>
+                    <strong>Green Impact:</strong>
+                    <p>Prevents redundant token consumption & CPU burn</p>
+                  </div>
+                </li>
+              </ul>
+              <a href="#comment-form-anchor" class="btn-rate-jump">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                Rate This Post
+              </a>
+            </div>
+          </div>
+
+          <!-- Comment Submission Card -->
+          <div class="comment-form-card" id="comment-form-anchor">
+            <div class="form-card-header">
+              <div class="form-header-text">
+                <h3 class="form-title">Leave a Review & Comment</h3>
+                <p class="form-desc">Your rating and review will appear immediately below for everyone reading!</p>
+              </div>
+              <div class="form-badge">Public Discussion</div>
+            </div>
+
+            <form id="blog-comment-form" class="comment-form" novalidate>
+              <!-- Star Rating Input Picker -->
+              <div class="form-group rating-input-group">
+                <div class="form-label">
+                  <span>Your Rating <span class="required-star">*</span></span>
+                  <span class="rating-feedback-text" id="rating-score-label">⭐⭐⭐⭐⭐ 5 / 5 - Masterpiece! Outstanding 🚀</span>
+                </div>
+                <div class="star-rating-picker" id="star-picker" role="radiogroup" aria-label="Choose rating from 1 to 5 stars">
+                  <button type="button" class="star-btn active" data-value="1" aria-label="1 star">★</button>
+                  <button type="button" class="star-btn active" data-value="2" aria-label="2 stars">★</button>
+                  <button type="button" class="star-btn active" data-value="3" aria-label="3 stars">★</button>
+                  <button type="button" class="star-btn active" data-value="4" aria-label="4 stars">★</button>
+                  <button type="button" class="star-btn active" data-value="5" aria-label="5 stars">★</button>
+                </div>
+                <input type="hidden" name="rating" id="selected-rating" value="5">
+              </div>
+
+              <!-- Name and Role Row -->
+              <div class="form-row-two-col">
+                <div class="form-group">
+                  <label for="comment-author" class="form-label">
+                    <span>Your Name <span class="required-star">*</span></span>
+                  </label>
+                  <div class="input-with-icon">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <input 
+                      type="text" 
+                      id="comment-author" 
+                      class="form-input" 
+                      placeholder="e.g. Sarah Connor" 
+                      required 
+                      maxlength="50" 
+                      autocomplete="name"
+                    >
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="comment-role" class="form-label">
+                    <span>Role / Organization <span class="label-optional">(optional)</span></span>
+                  </label>
+                  <div class="input-with-icon">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                    <input 
+                      type="text" 
+                      id="comment-role" 
+                      class="form-input" 
+                      placeholder="e.g. AI Engineer, DevOps, Student" 
+                      maxlength="60"
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Avatar Color Picker -->
+              <div class="form-group">
+                <label class="form-label"><span>Choose Avatar Color</span></label>
+                <div class="avatar-palette" id="avatar-color-picker">
+                  <button type="button" class="color-dot active" data-color="#6366f1" style="--dot-color: #6366f1;" title="Indigo"></button>
+                  <button type="button" class="color-dot" data-color="#06b6d4" style="--dot-color: #06b6d4;" title="Cyan"></button>
+                  <button type="button" class="color-dot" data-color="#10b981" style="--dot-color: #10b981;" title="Emerald"></button>
+                  <button type="button" class="color-dot" data-color="#f59e0b" style="--dot-color: #f59e0b;" title="Amber"></button>
+                  <button type="button" class="color-dot" data-color="#f43f5e" style="--dot-color: #f43f5e;" title="Rose"></button>
+                  <button type="button" class="color-dot" data-color="#a855f7" style="--dot-color: #a855f7;" title="Purple"></button>
+                </div>
+              </div>
+
+              <!-- Quick Topic Tag Chips -->
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Quick Topic Tags <span class="label-optional">(click to add into comment)</span></span>
+                </label>
+                <div class="quick-tags-row">
+                  <button type="button" class="quick-tag-chip" data-tag="🛡️ Security Isolation">🛡️ Security Isolation</button>
+                  <button type="button" class="quick-tag-chip" data-tag="⚡ Docker Model Runner">⚡ Docker Model Runner</button>
+                  <button type="button" class="quick-tag-chip" data-tag="🌱 Green AI & Token Saving">🌱 Green AI & Token Saving</button>
+                  <button type="button" class="quick-tag-chip" data-tag="🤖 Autonomous Agents">🤖 Autonomous Agents</button>
+                  <button type="button" class="quick-tag-chip" data-tag="📦 MicroVMs vs Docker">📦 MicroVMs vs Docker</button>
+                </div>
+              </div>
+
+              <!-- Comment Textarea -->
+              <div class="form-group">
+                <div class="textarea-header">
+                  <label for="comment-body" class="form-label">
+                    <span>Your Thoughts or Question <span class="required-star">*</span></span>
+                  </label>
+                  <span class="char-count" id="comment-char-count">0 / 1000</span>
+                </div>
+                <textarea 
+                  id="comment-body" 
+                  class="form-textarea" 
+                  rows="4" 
+                  maxlength="1000"
+                  placeholder="What resonated with you? Have you tested agent sandboxing or encountered runaway tokens in your workflow? Write here..."
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Notification Banner -->
+              <div id="comment-form-status" class="form-status-banner" style="display: none;"></div>
+
+              <!-- Form Submit Actions -->
+              <div class="form-submit-row">
+                <div class="author-preview-inline" id="author-preview-box">
+                  <div class="preview-avatar" id="author-preview-avatar">R</div>
+                  <span class="preview-text">Posting as: <strong id="author-preview-name">Reader</strong></span>
+                </div>
+
+                <button type="submit" id="submit-comment-btn" class="btn-submit-comment">
+                  <span class="btn-submit-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                  </span>
+                  <span>Post Review & Comment</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Comments Feed Header & Sorting -->
+          <div class="comments-feed-header">
+            <div class="feed-title-wrap">
+              <h3 class="feed-title">
+                Reader Comments & Reviews (<span id="comments-display-count">4</span>)
+              </h3>
+              <span class="feed-live-indicator">
+                <span class="pulsing-dot"></span> Realtime Community Feed
+              </span>
+            </div>
+
+            <!-- Sorting Pills -->
+            <div class="sort-pills-row" id="sort-controls">
+              <span class="sort-label">Sort by:</span>
+              <button type="button" class="sort-pill active" data-sort="newest">Newest</button>
+              <button type="button" class="sort-pill" data-sort="highest">Highest Rating</button>
+              <button type="button" class="sort-pill" data-sort="popular">Most Liked</button>
+            </div>
+          </div>
+
+          <!-- Dynamic Comments List Container -->
+          <div class="comments-list" id="comments-list-container">
+            <!-- Populated dynamically by app.js -->
+          </div>
+
+          <!-- Comments Footer Actions -->
+          <div class="comments-footer-actions">
+            <span class="storage-note">💾 Reviews and comments persist in your browser session.</span>
+            <button type="button" class="btn-reset-demo" id="btn-reset-comments" title="Reset to original community comments">
+              Reset Demo Reviews
+            </button>
           </div>
         </section>
 
